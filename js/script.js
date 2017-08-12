@@ -2,18 +2,9 @@ const calendar = document.getElementById('calendar');
 
 const currentDate = new Date();
 
-const randomDate = new Date(2017, 2, 1);
+const randomDate = new Date(2017, 8, 11);
 
 const dayDiv = document.getElementsByClassName("day");
-
-//Calendar Data
-
-
-const dayIndex = [0, 1, 2, 3, 4, 5, 6];
-
-// these are human-readable month name labels, in order
-const monthIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-
 
 
 // Print day name
@@ -73,12 +64,19 @@ function createCurrentWeek(date) {
   }
 
   // Second Part of Week
-  if ( dayPosition < 6)
-  for (var j=dayPosition+1; i<=6-dayPosition; i++) {
-    
+  if ( dayPosition < 6) {
+    monthNumber = date.getMonth();
+    dayNumber = date.getDate() + 1;
+
+  for (var j=dayPosition+1; j<=6; j++) {
+    if (dayNumber > daysInMonths[monthNumber]) {
+      monthNumber++;
+      dayNumber = 1;
+    }
+    dayDiv[j].innerText = printDateName(j, monthNumber, dayNumber);
+    dayNumber++;
   }
-
-
+}
 }
 
 createCurrentWeek(randomDate);
