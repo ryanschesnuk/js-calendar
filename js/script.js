@@ -2,7 +2,7 @@ const calendar = document.getElementById('calendar');
 
 const currentDate = new Date();
 
-const randomDate = new Date(2017, 8, 11);
+const randomDate = new Date(2018, 2, 11);
 
 const dayDiv = document.getElementsByClassName("day");
 
@@ -48,7 +48,9 @@ function createCurrentWeek(date) {
   let dayPosition = date.getDay();
   let monthNumber = date.getMonth();
   let dayNumber = date.getDate();
+  let year = date.getFullYear();
 
+  let today = new Date();
 
   // First Part of Week
 
@@ -60,6 +62,9 @@ function createCurrentWeek(date) {
     }
 
     dayDiv[i].innerText = printDateName(i, monthNumber, dayNumber);
+    if (monthNumber === today.getMonth() && dayNumber === today.getDate() && year === today.getFullYear()){
+      dayDiv[i].classList.add("today");
+    }
     dayNumber--;
   }
 
@@ -79,4 +84,4 @@ function createCurrentWeek(date) {
 }
 }
 
-createCurrentWeek(randomDate);
+createCurrentWeek(currentDate);
