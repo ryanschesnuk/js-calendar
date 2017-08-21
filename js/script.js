@@ -2,7 +2,7 @@ const calendar = document.getElementById('calendar');
 
 const currentDate = new Date();
 
-const randomDate = new Date(2018, 2, 11);
+const randomDate = new Date(2018, 0, 1);
 
 const dayDiv = document.getElementsByClassName("day");
 
@@ -58,6 +58,12 @@ function createCurrentWeek(date) {
 
     if (dayNumber < 1) {
       monthNumber--;
+
+      if (monthNumber < 0) {
+        monthNumber = 11;
+        year--;
+      }
+
       dayNumber = daysInMonths[monthNumber];
     }
 
@@ -77,6 +83,11 @@ function createCurrentWeek(date) {
     if (dayNumber > daysInMonths[monthNumber]) {
       monthNumber++;
       dayNumber = 1;
+
+      if (monthNumber > 11) {
+        monthNumber = 0;
+        year++;
+      }
     }
     dayDiv[j].innerText = printDateName(j, monthNumber, dayNumber);
     dayNumber++;
@@ -84,4 +95,4 @@ function createCurrentWeek(date) {
 }
 }
 
-createCurrentWeek(currentDate);
+createCurrentWeek(randomDate);
